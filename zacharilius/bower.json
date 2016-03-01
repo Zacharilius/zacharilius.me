@@ -1,0 +1,14 @@
+{
+  "name": "zacharilius",
+  "authors": [
+    "zacharilius <zabensley@gmail.com>"
+  ],
+  "description": "Personal website",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "zacharilius.me",
+  "devDependencies": {
+    "html5-boilerplate": "^5.3.0"
+  }
+}
