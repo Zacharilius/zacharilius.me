@@ -1,4 +1,6 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 
 def index(request):
-     render(request, "portfolio/index.html", {})
+	#return HttpResponse("Http response")
+    return render(request, "portfolio/index.html", {})
