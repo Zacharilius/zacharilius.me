@@ -10,5 +10,10 @@
   "homepage": "zacharilius.me",
   "devDependencies": {
     "html5-boilerplate": "^5.3.0"
+  },
+  "dependencies": {
+    "icomoon-bower": "icomoon#^0.1.0",
+    "bootstrap": "^3.3.6",
+    "jquery": "^2.2.1"
   }
 }
