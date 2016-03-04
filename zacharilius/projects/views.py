@@ -1,5 +1,6 @@
-from django.http import HttpResponse
 from django.shortcuts import render
 
-def index(request):
-    return HttpResponse('projects')
+def projects(request):
+    return render(request, "projects/projects.html", {
+    	'active_tab': 'projects'
+    })

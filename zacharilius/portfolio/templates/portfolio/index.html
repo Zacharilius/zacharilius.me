@@ -5,72 +5,13 @@
 {% block head_title %} Zacharilius {% endblock %}
 
 {% block head_css %}
-<link rel="stylesheet" href="{% static  "portfolio/css/portfolio.css" %}">
+
+
+
+
 {% endblock %}
 
 {% block content %}
-<nav class="navbar">
-    <div class="container">
-        <ul class="list-inline pull-left">  
-            <li>
-                <a class="" href="/" data-toggle="tooltip" data-placement="bottom" title="Home">
-                    <div class="square"><span id="home" class="icon icon-home3"></span></div>
-                </a>
-            </li>
-            <li>
-                <a class="" href="/projects" data-toggle="tooltip" data-placement="bottom" title="Projects">
-                    <div class="square">
-                        <span id="projects" class="icon icon-sphere"></span>
-                     </div>
-                </a>
-            </li>
-            <li>
-                <a class="" href="/maps" data-toggle="tooltip" data-placement="bottom" title="Maps!">
-                    <div class="map-circle circle">
-                        <span id="earth" class="icon icon-earth"></span>
-                    </div>
-                </a>
-            </li>
-            <li>
-                <a class="" href="/contact" data-toggle="tooltip" data-placement="bottom" title="Contact">
-                    <div class="square">
-                        <span id="contactme" class="icon icon-envelop"></span>
-                    </div>
-                </a>
-            </li>
-        </ul>
-        <ul class="list-inline pull-right nav-hide">
-            <li>
-                <a class="" href="http://www.github.com/zacharilius" data-toggle="tooltip" data-placement="bottom" title="Github">
-                    <div class=" circle">
-                        <span id="github" class="icon icon-github"></span>
-                    </div>
-                </a>
-            </li>
-            <li>
-                <a class="" href="http://codepen.io/zacharilius/" data-toggle="tooltip" data-placement="bottom" title="CodePen">
-                    <div class="square">
-                        <span id="codepen" class="icon icon-codepen"></span>
-                    </div>
-                </a>
-            </li>       
-            <li>
-                <a class="" href="https://www.linkedin.com/in/zabensley" data-toggle="tooltip" data-placement="bottom" title="Linkedin">
-                    <div class="square-linkedin square">
-                        <span id="linkedin" class="icon  icon-linkedin"></span>
-                    </div>
-                </a>
-            </li>
-            <li>
-                <a class="" href="https://instagram.com/zacharilius/" data-toggle="tooltip" data-placement="bottom" title="Instagram">
-                    <div class="square-instagram square">
-                        <span id="instagram" class="icon icon-instagram"></span>
-                    </div>
-                </a>
-            </li>
-        </ul>   
-    </div>  
-</nav>
 <div class="title-container">
     <h1 class="title">Zachary Bensley</h1>
     <h3 class="sub-title">Full Stack Developer</h3>
@@ -106,4 +47,10 @@
   <img class="center-image" alt="Seattle Skyline" id="seattle-pic" src="{% static "portfolio/images/seattle_skyline.png" %}">
 </div>
 {% endblock %}
+
+{% block body_js %}
+<script src="{% static  "portfolio/js/portfolio.js" %}"></script>
+
+{% endblock %}
+
 
