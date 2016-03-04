@@ -44,9 +44,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Local apps
+    'maps',    
     'portfolio',
-    'maps',
     'projects',
+    'resume',
 ]
 
 MIDDLEWARE_CLASSES = [
