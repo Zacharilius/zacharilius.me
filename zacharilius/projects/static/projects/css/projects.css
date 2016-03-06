@@ -1,0 +1,56 @@
+.project-container {
+	margin: 0;
+}
+
+.project-picture {
+	width: 100%;
+}
+
+.project-picture-desktop {
+
+}
+
+.project-picture-tablet {
+	display: none;
+}
+
+
+.project-picture-phone {
+	display: none;
+}
+
+.project-device-icon {
+	width: 32px;
+	margin: 0 auto;	
+	display: block;
+}
+
+.device-icon-container {
+	padding-left: calc(50% - 48px);
+	display: inline-block;
+	margin: 0;
+}
+
+.odd-job-logo-button {
+	width: 15px;
+}
+
+@media (max-width: 839px) {
+	.projects-container {
+		padding-top: 32px;
+	}
+
+	.device-icon-container {
+		padding-left: calc(50% - 48px);
+		display: inline-block;
+		margin: 0;
+	}
+
+	.project-device-icon {
+		display: inline-block;
+	}
+}
+
+@media (max-width: 839px) and (min-width: 480px) {
+
+}

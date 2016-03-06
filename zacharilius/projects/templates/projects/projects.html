@@ -5,20 +5,53 @@
 {% block head_title %} Zacharilius - Projects{% endblock %}
 
 {% block head_css %}
-<link rel="stylesheet" href="{% static  "projects/css/projects.css" %}">
+	<link rel="stylesheet" href="{% static  "projects/css/projects.css" %}">
 {% endblock %}
 
 {% block content %}
-
-
-
-
-
+<div class="mdl-grid projects-container">
+	<div class="mdl-cell--8-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+		<img id="project-odd-job-desktop-pic" class="project-picture project-picture-desktop" src="{% static  "projects/images/odd_job_desktop.png" %}" alt="Odd-Job Image">
+		<img id="project-odd-job-tablet-pic" class="project-picture project-picture-tablet" src="{% static  "projects/images/odd_job_tablet.png" %}" alt="Odd-Job Image">
+		<img id="project-odd-job-phone-pic" class="project-picture project-picture-phone" src="{% static  "projects/images/odd_job_phone.png" %}" alt="Odd-Job Image">	
+	</div>
+	<div class="mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+		<h1>Odd-Job</h1>		
+		<p>Odd-Job is a job posting site that specializes in odd jobs. It allows users to find and
+		post odd-jobs around the Greater Seattle Area.</p>
+		<p>
+			<span class="technologies">HTML5</span>
+			<span class="technologies">AngularJS</span>
+			<span class="technologies">GoogleMapsAPI</span>
+			<span class="technologies">Google Endpoints</span>
+			<span class="technologies">Java</span>
+			<span class="technologies">Oauth 2.0</span>
+			<span class="technologies">JavaScript</span>
+			<span class="technologies">CSS3</span>
+		</p>
+		<button class="mdl-button mdl-js-button mdl-button--icon project-device-icon" img-id="project-odd-job-desktop-pic">
+			<span class="icon-display"></span>
+		</button>
+		<button class="mdl-button mdl-js-button mdl-button--icon project-device-icon" img-id="project-odd-job-tablet-pic">
+			<span class="icon-tablet"></span>
+		</button>
+		<button class="mdl-button mdl-js-button mdl-button--icon project-device-icon" img-id="project-odd-job-phone-pic">
+			<span class="icon-mobile2"></span>
+		</button>				
+		<a href="https://www.github.com/zacharilius/odd-job">
+			<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+			 	<span class="icon-github" aria-hidden="true"></span> GitHub
+			</button>
+		</a>				
+		<a href="https://odd-job.appspot.com">
+			<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+			 	<img class="odd-job-logo-button" src="{% static  "projects/images/odd_job_logo.png" %}"> Odd-Job
+			</button>
+		</a>
+	</div>
+</div>
 {% endblock %}
 
 {% block body_js %}
 <script src="{% static  "projects/js/projects.js" %}"></script>
-
 {% endblock %}
-
-
