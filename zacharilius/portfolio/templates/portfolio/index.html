@@ -9,39 +9,44 @@
 {% endblock %}
 
 {% block content %}
-<div class="title-container">
-    <h1 class="title">Zachary Bensley</h1>
-    <h3 class="sub-title">Full Stack Developer</h3>
-    <div class="">
-        <ul class="list-inline">    
-            <li>
-                <div class="btn tooltip-message" href="#" data-toggle="tooltip" data-placement="bottom" title="Day"><span id="sun-icon" class="icon weather-icon icon-sun"></span></div>
-            </li>
-            <li>
-                <div class="btn tooltip-message" href="#" data-toggle="tooltip" data-placement="bottom" title="Rainy"><span id="rain-icon" class="icon weather-icon icon-droplet"></span></div>
-            </li>
-            <li>
-                <div class="btn tooltip-message" href="#" data-toggle="tooltip" data-placement="bottom" title="Night"><span id="night-icon" class="icon weather-icon icon-star-empty"></span></div>
-            </li>      
-        </ul>
+<div class="portfolio-container">
+    <div class="title-container">
+        <h1 class="title">Zachary Bensley</h1>
+        <h3 class="sub-title">Full Stack Developer</h3>
+        <!--
+        <div class="">
+            <ul class="list-inline">    
+                <li>
+                    <div class="btn tooltip-message" href="#" data-toggle="tooltip" data-placement="bottom" title="Day"><span id="sun-icon" class="icon weather-icon icon-sun"></span></div>
+                </li>
+                <li>
+                    <div class="btn tooltip-message" href="#" data-toggle="tooltip" data-placement="bottom" title="Rainy"><span id="rain-icon" class="icon weather-icon icon-droplet"></span></div>
+                </li>
+                <li>
+                    <div class="btn tooltip-message" href="#" data-toggle="tooltip" data-placement="bottom" title="Night"><span id="night-icon" class="icon weather-icon icon-star-empty"></span></div>
+                </li>      
+            </ul>
+        </div>
+        -->
     </div>
-</div>
-<div class="weather-panel-container">
-    <div id="sunny-panel" class="weather-panel"></div>
-    <div id="rainy-panel" class="weather-panel">
-        <div class="cloud cloud-1"></div>
-        <div class="cloud cloud-2"></div>
-        <div class="cloud cloud-3"></div>
-        <div class="cloud cloud-4"></div>
-        <div class="cloud cloud-1"></div>
-        <div class="cloud cloud-2"></div>
-        <div class="cloud cloud-3"></div>
-        <div class="cloud cloud-4"></div>    
+    <div class="weather-panel-container">
+        <div id="sunny-panel" class="weather-panel"></div>
+        <div id="rainy-panel" class="weather-panel">
+            <div class="cloud cloud-1"></div>
+            <div class="cloud cloud-2"></div>
+            <div class="cloud cloud-3"></div>
+            <div class="cloud cloud-4"></div>
+            <div class="cloud cloud-1"></div>
+            <div class="cloud cloud-2"></div>
+            <div class="cloud cloud-3"></div>
+            <div class="cloud cloud-4"></div>    
+        </div>
+        <div id="night-panel" class="weather-panel"></div>  
     </div>
-    <div id="night-panel" class="weather-panel"></div>  
-</div>
-<div class="image-cropper">
-  <img class="center-image" alt="Seattle Skyline" id="seattle-pic" src="{% static "portfolio/images/seattle_skyline.png" %}">
+
+    <div class="image-cropper">
+      <img class="center-image" alt="Seattle Skyline" id="seattle-pic" src="{% static "portfolio/images/seattle_skyline.png" %}">
+    </div>
 </div>
 {% endblock %}
 

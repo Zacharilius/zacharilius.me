@@ -27,49 +27,50 @@ body {
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 /* Navigation */
-nav {
-	padding-top: 10px;
-	background-color: #00796B;
+
+header {
+	background-color: #00796B !important;
 }
 
-.
-.navbar-default {
-    background-color: transparent;
+nav .mdl-navigation__link {
+	border-bottom: 5px solid transparent;
 }
-.navbar {
-    border-bottom: 1px solid #FFC107;
+
+nav .is-active {
+    opacity: 1;
+    border-bottom: 5px solid rgb(255,171,64);
+    height: 64px;
 }
-.nav-buttons {
-	position: fixed;
-	top: 1%;
-	right: 1%;
-}
-.icon {
-	color: #FFFFFF;
+
+.nav-top .icon {
 	font-size: 35px;
-	margin:0px 0px 0px 0px;
-	padding:0px 0px 0px 0px;
+	color: #FFFFFF;
+}
+
+.nav-drawer .icon {
+	font-size: 25px;
+	color: #757575;
+}
+
+.nav-github:hover, .nav-github:focus {
+	color:#6D3353;
+}
+
+.nav-codepen:hover, .nav-codepen:focus {
+	color:#000;
+}
+
+.nav-linkedin:hover, .nav-linkedin:focus {
+	color: #00AFF0;	
+}
+
+.nav-instagram:hover, .nav-instagram:focus {
+	color:#F15E5E;
 }
 
 
-/* Tooltip */
-.tooltip-message + .tooltip > .tooltip-inner {
-    background-color: transparent; 
-    color: #FFFFFF; 
-    padding-bottom: 0px;
-    font-size: 20px;
-}
-/* Tooltip on top */
-.tooltip-message + .tooltip.top > .tooltip-arrow {
-    border-top: 5px solid transparent;
-}
-/* Tooltip on bottom */
-.tooltip-message + .tooltip.bottom > .tooltip-arrow {
-    border-bottom: 5px solid transparent;
-}
-a:focus, a:hover {
-    text-decoration: none;
-}
+
+
 
 #projects:hover, #projects:focus, #projects.is-active {
 	color:#FFC107;

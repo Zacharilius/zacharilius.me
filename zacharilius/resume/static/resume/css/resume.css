@@ -1,7 +1,37 @@
 .resume-container {
     margin: 0 auto;
-    padding: 10px 120px 10px 120px;
-    padding-right: 120px;
+}
+
+@media (min-width: 768px) {
+    .resume-container {
+        max-width: 730px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .resume-container {
+        width: 1170px;
+    }
+}
+@media (min-width: 992px) {
+    .resume-container {
+        width: 970px;
+    }
+}
+
+.jumbotron {
+    position: relative;
+    padding: 24px;
+}
+
+#resume-github {
+    position: fixed;
+    bottom: 64px;
+    right: 64px;
+}
+
+.resume-title, .resume-subtitle {
+    text-align: center;
 }
 
 .resume-section-container {
