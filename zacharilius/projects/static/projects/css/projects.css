@@ -1,5 +1,13 @@
-.project-container {
-	margin: 0;
+.projects-container {
+	padding: 60px 24px 60px 24px;
+}
+
+.project-text-container {
+	padding: 1em;
+}
+
+.project-title-text {
+	text-align: center;
 }
 
 .project-picture {
@@ -19,15 +27,20 @@
 	display: none;
 }
 
+.project-button-container {
+	width: 100%;
+	text-align: center;
+	padding: 12px;
+}
+
 .project-device-icon {
 	width: 32px;
 	margin: 0 auto;	
-	display: block;
+	display: inline-block;
 }
 
 .device-icon-container {
 	padding-left: calc(50% - 48px);
-	display: inline-block;
 	margin: 0;
 }
 
