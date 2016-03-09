@@ -12,6 +12,8 @@
     "icomoon-bower": "icomoon#^0.1.0",
     "jquery": "^2.2.1",
     "material-design-lite": "^1.1.2",
-    "roboto-fontface": "^0.4.5"
+    "roboto-fontface": "^0.4.5",
+    "d3": "^3.5.16",
+    "topojson": "^1.6.24"
   }
 }
