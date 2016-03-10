@@ -7,32 +7,12 @@
 {% block head_css %}
 <link rel="stylesheet" href="{% static  "maps/css/maps.css" %}">
 
-<style>
-.graticule {
-  fill: none;
-  stroke: #777;
-  stroke-width: .5px;
-  stroke-opacity: .5;
-}
-
-.land {
-  fill: #222;
-}
-
-.boundary {
-  fill: none;
-  stroke: #fff;
-  stroke-width: .5px;
-}
-</style>
 {% endblock %}
+
 
 {% block content %}
-
-
-
-
 {% endblock %}
+
 
 {% block body_js %}
 <!-- Library JS -->
@@ -40,47 +20,14 @@
 <script src="{% static "lib/topojson/topojson.js" %}"></script>
 
 <!-- Site JS -->
-<script src="{% static  "maps/js/maps.js" %}"></script>
+<script src="{% static "maps/json/world_50.json" %}"></script>
 
 <script>
-var width = 960,
-    height = 480;
+	window.worldMapUrl = "{% static "maps/json/world_50.json" %}"
+	window.starbucksUrl = "{% static "maps/json/starbucks.json" %}"
+ </script>
 
-var projection = d3.geo.equirectangular()
-    .scale(153)
-    .translate([width / 2, height / 2])
-    .precision(.1);
-
-var path = d3.geo.path()
-    .projection(projection);
-
-var graticule = d3.geo.graticule();
-
-var svg = d3.select("body").append("svg")
-    .attr("width", width)
-    .attr("height", height);
-
-svg.append("path")
-    .datum(graticule)
-    .attr("class", "graticule")
-    .attr("d", path);
-
-d3.json("{% static  "maps/json/world_50.json" %}", function(error, world) {
-  if (error) throw error;
-
-  svg.insert("path", ".graticule")
-      .datum(topojson.feature(world, world.objects.land))
-      .attr("class", "land")
-      .attr("d", path);
-
-  svg.insert("path", ".graticule")
-      .datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }))
-      .attr("class", "boundary")
-      .attr("d", path);
-});
-
-d3.select(self.frameElement).style("height", height + "px");
-</script>
+ <script src="{% static  "maps/js/maps.js" %}"></script>
 
 {% endblock %}
 
