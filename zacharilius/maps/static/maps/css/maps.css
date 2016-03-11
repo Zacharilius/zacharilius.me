@@ -1,3 +1,8 @@
+#map-container svg {
+	display: block;
+	margin: 0 auto;
+}
+
 .graticule {
   fill: none;
   stroke: #777;

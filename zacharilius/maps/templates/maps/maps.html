@@ -2,17 +2,29 @@
 
 {% load static from staticfiles %}
 
+{% load leaflet_tags %}
+
 {% block head_title %} Zacharilius - Maps {% endblock %}
 
 {% block head_css %}
-<link rel="stylesheet" href="{% static  "maps/css/maps.css" %}">
+
+	<link rel="stylesheet" href="{% static  "maps/css/maps.css" %}">
+	{% leaflet_css %}
+
+{% endblock %}
+
+{% block head_js %}
+
+	{% leaflet_js %}
 
 {% endblock %}
 
 
 {% block content %}
-{% endblock %}
 
+	<div id="map-container"></div>
+
+{% endblock %}
 
 {% block body_js %}
 <!-- Library JS -->
@@ -23,8 +35,8 @@
 <script src="{% static "maps/json/world_50.json" %}"></script>
 
 <script>
-	window.worldMapUrl = "{% static "maps/json/world_50.json" %}"
-	window.starbucksUrl = "{% static "maps/json/starbucks.json" %}"
+	window.worldMapUrl = "{% static "maps/json/world_50.json" %}";
+	window.starbucksUrl = "{% static "maps/json/starbucks.json" %}";
  </script>
 
  <script src="{% static  "maps/js/maps.js" %}"></script>
