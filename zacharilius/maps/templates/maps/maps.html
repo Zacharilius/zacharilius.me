@@ -32,9 +32,8 @@
 <script src="{% static "lib/topojson/topojson.js" %}"></script>
 
 <!-- Site JS -->
-<script src="{% static "maps/json/world_50.json" %}"></script>
-
 <script>
+	window.usStateMapUrl = "{% static "maps/json/us_states.json" %}";
 	window.worldMapUrl = "{% static "maps/json/world_50.json" %}";
 	window.starbucksUrl = "{% static "maps/json/starbucks.json" %}";
  </script>
