@@ -10,6 +10,10 @@ function drawStatesWithLabels() {
     var projection = d3.geo.albersUsa()
         .scale(1000)
         .translate([width / 2, height / 2]);
+
+    var color = d3.scale.category10()
+    color.range(color.range().slice(0,8));
+
     var path = d3.geo.path()
         .projection(projection);
     var svg = d3.select("#map-container").append("svg")
@@ -17,18 +21,15 @@ function drawStatesWithLabels() {
         .attr("height", height);
     d3.json(window.usStateMapUrl, function(error, us) {
       if (error) throw error;
-      svg.insert("path", ".graticule")
-          .datum(topojson.feature(us, us.objects.land))
-          .attr("class", "land")
-          .attr("d", path);
-      // svg.insert("path", ".graticule")
-      //     .datum(topojson.mesh(us, us.objects.counties, function(a, b) { return a !== b && !(a.id / 1000 ^ b.id / 1000); }))
-      //     .attr("class", "county-boundary")
-      //     .attr("d", path);
-      svg.insert("path", ".graticule")
-          .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
-          .attr("class", "state-boundary")
-          .attr("d", path);
+      var countries = topojson.feature(us, us.objects.states).features;
+      var neighbors = topojson.neighbors(us.objects.states.geometries);
+
+      svg.selectAll(".state")
+          .data(countries)
+        .enter().insert("path", ".graticule")
+          .attr("class", "state")
+          .attr("d", path)
+          .style("fill", function(d, i) { return color(d.color = d3.max(neighbors[i], function(n) { return countries[n].color; }) + 1 | 0); });
     });
     d3.select(self.frameElement).style("height", height + "px");    
 }
@@ -63,6 +64,7 @@ function drawWorldStarbucksMap() {
             .datum(topojson.feature(world, world.objects.land))
             .attr('class', 'land')
             .attr('d', path);
+
 
         svg.insert('path', '.graticule')
             .datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }))

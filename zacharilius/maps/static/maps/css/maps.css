@@ -17,3 +17,7 @@
   fill: none;
   stroke: #fff;
 }
+
+.state:hover {
+  opacity: .8;
+}
