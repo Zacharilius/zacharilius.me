@@ -3,6 +3,38 @@
 	margin: 0 auto;
 }
 
+#state-tooltip {
+  background-color: #FFFFFF;
+  position: fixed;
+  display: none;
+  top: 50%;
+  left: 50%;
+  font-family: Roboto;
+  font-size: 16px;
+  cursor: pointer; /* So the cursor will stay as a pointer above states */
+  border-radius: 10px;
+  padding: 5px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* US State */
+
+.state-boundary {
+  fill: none;
+  stroke: #fff;
+}
+
+.state {
+  cursor: pointer;
+}
+
+.state:hover {
+  opacity: .8;
+}
+
+/* -------------------------------------------------------------------------- */
+/* World Starbucks Map */
+
 .land {
   fill: #222;
 }
@@ -11,13 +43,4 @@
   fill: none;
   stroke: #fff;
   stroke-width: .5px;
-}
-
-.state-boundary {
-  fill: none;
-  stroke: #fff;
-}
-
-.state:hover {
-  opacity: .8;
 }
