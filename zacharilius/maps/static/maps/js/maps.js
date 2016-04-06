@@ -53,6 +53,9 @@ function drawUsStatesWithLabels() {
                     return color(d.color = d3.max(neighbors[i], 
                         function(n) { return states[n].color; }) + 1 | 0); 
                 })
+                .on('click', function(d) {
+                    appendWikipediaStateSearch(d.properties.STATE_NAME);
+                })
                 .on('mousemove', function(d) {
                     $('#state-tooltip').text(d.properties.STATE_NAME).show();
                 })
@@ -61,6 +64,31 @@ function drawUsStatesWithLabels() {
                 });
     });
     d3.select(self.frameElement).style("height", height + "px");    
+}
+
+function appendWikipediaStateSearch(stateName){
+    $.ajax({
+        type: "GET",
+        url: 'https://en.wikipedia.org/w/api.php?format=json&action=query&generator=search&gsrnamespace=0&gsrlimit=10&prop=pageimages|extracts&pilimit=max&exintro&explaintext&exsentences=1&exlimit=max&gsrsearch=' + stateName.split(" ").join("%20") + '&callback=JSON_CALLBACK',
+        contentType: "application/json; charset=utf-8",
+        dataType: "jsonp",
+        success: function (parsed_json, textStatus, jqXHR) {
+            $('#state-search-results').empty();
+            console.log(parsed_json);
+            var pages = parsed_json.query.pages;
+            for(page in pages){
+                var title = pages[page].title;
+                var extract = pages[page].extract;
+                var pageId = pages[page].pageid;
+                $('#state-search-results').append("<a href = http://en.wikipedia.org/?curid="+ pageId + "><div><p><b>" + title + ": </b>" + extract + "</p></br></div></a>");
+            };
+        },
+        error: function (errorMessage) {
+            $('#state-search-results').empty();
+            $('#state-search-results').html('<p>Error with your request</p>');
+            console.error("ERROR: " + errorMessage);
+        }
+    });
 }
 
 /* -------------------------------------------------------------------------- */
