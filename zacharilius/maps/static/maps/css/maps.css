@@ -32,6 +32,21 @@
   opacity: .8;
 }
 
+.wikipedia-search-container {
+  padding: 20px;
+}
+
+.wikipedia-search-container a {
+  text-decoration: none;
+}
+
+.wikipedia-search-container p {
+  padding-bottom: 20px;
+  font-size: 18px;
+  font-weight: 300;
+  color: #232323;
+}
+
 /* -------------------------------------------------------------------------- */
 /* World Starbucks Map */
 

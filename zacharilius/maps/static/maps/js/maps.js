@@ -73,19 +73,19 @@ function appendWikipediaStateSearch(stateName){
         contentType: "application/json; charset=utf-8",
         dataType: "jsonp",
         success: function (parsed_json, textStatus, jqXHR) {
-            $('#state-search-results').empty();
+            $('#wikipedia-us-state-search-results').empty();
             console.log(parsed_json);
             var pages = parsed_json.query.pages;
             for(page in pages){
                 var title = pages[page].title;
                 var extract = pages[page].extract;
                 var pageId = pages[page].pageid;
-                $('#state-search-results').append("<a href = http://en.wikipedia.org/?curid="+ pageId + "><div><p><b>" + title + ": </b>" + extract + "</p></br></div></a>");
+                $('#wikipedia-us-state-search-results').append("<a href = http://en.wikipedia.org/?curid="+ pageId + "><div><p><b>" + title + ": </b>" + extract + "</p></br></div></a>");
             };
         },
         error: function (errorMessage) {
-            $('#state-search-results').empty();
-            $('#state-search-results').html('<p>Error with your request</p>');
+            $('#wikipedia-us-state-search-results').empty();
+            $('#wikipedia-us-state-search-results').html('<p>Error with your request</p>');
             console.error("ERROR: " + errorMessage);
         }
     });
