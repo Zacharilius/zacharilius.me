@@ -19,7 +19,17 @@ function setupMouseMoveTooltipLabel() {
 /* US State Map */
 
 function setupUsStateMap() {
-    drawUsStatesWithLabels();
+    $('#show-us-map-container').click(function() {
+        $('#map-intro').hide();
+        $('#us-map-container').show();
+        drawUsStatesWithLabels();
+    })
+
+    $('#start-us-state-map-quiz').click(function() {
+        $('#us-map-container').find("svg").remove();
+        setupUsStateQuiz();
+        drawUsStatesForQuiz();
+    })
 }
 
 function drawUsStatesWithLabels() {
@@ -34,7 +44,7 @@ function drawUsStatesWithLabels() {
 
     var path = d3.geo.path()
         .projection(projection);
-    var svg = d3.select("#map-container").append("svg")
+    var svg = d3.select("#us-map-container .map").append("svg")
         .attr("width", width)
         .attr("height", height);
     d3.json(window.usStateMapUrl, function(error, us) {
@@ -44,7 +54,7 @@ function drawUsStatesWithLabels() {
 
       svg.selectAll(".state")
             .data(states)
-            .enter().insert("path", ".graticule")
+            .enter().insert("path", ".graticule")                  
                 .attr("class", "state")
                 .attr("d", path)
                 .attr('data-name', function(d) { return d.properties.STATE_NAME})
@@ -61,6 +71,56 @@ function drawUsStatesWithLabels() {
                 })
                 .on('mouseout', function(d) {
                     $('#state-tooltip').hide();
+                });
+    });
+    d3.select(self.frameElement).style("height", height + "px");    
+}
+
+function setupUsStateQuiz() {
+    
+}
+
+function drawUsStatesForQuiz() {
+    var width = $(window).width();
+    var height = $(window).height();
+    var projection = d3.geo.albersUsa()
+        .scale(1000)
+        .translate([width / 2, height / 2]);
+
+    var color = d3.scale.category10()
+    color.range(color.range().slice(0,8));
+
+    var path = d3.geo.path()
+        .projection(projection);
+    var svg = d3.select("#us-map-container .map").append("svg")
+        .attr("width", width)
+        .attr("height", height);
+    d3.json(window.usStateMapUrl, function(error, us) {
+      if (error) throw error;
+      var states = topojson.feature(us, us.objects.states).features;
+      var neighbors = topojson.neighbors(us.objects.states.geometries);
+
+      svg.selectAll(".state")
+            .data(states)
+            .enter().insert("path", ".graticule")
+                .attr("class", "state")
+                .attr("d", path)
+                .attr('data-name', function(d) { return d.properties.STATE_NAME})
+                .attr('data-abbrev', function(d) { return d.properties.STATE_ABBR})                
+                .attr("data-color", function(d, i) { 
+                    return color(d.color = d3.max(neighbors[i], 
+                        function(n) { return states[n].color; }) + 1 | 0); 
+                })
+                .style('fill', '#FFFFFF')
+                .style('stroke', '#232323')
+                .on('click', function(d) {
+                    //appendWikipediaStateSearch(d.properties.STATE_NAME);
+                })
+                .on('mousemove', function(d) {
+                    $(this).css('fill', $(this).attr('data-color'));
+                })
+                .on('mouseout', function(d) {
+                    $(this).css('fill', '#FFFFFF');
                 });
     });
     d3.select(self.frameElement).style("height", height + "px");    
@@ -108,7 +168,7 @@ function drawWorldStarbucksMap() {
 
     var graticule = d3.geo.graticule();
 
-    var svg = d3.select('#map-container').append('svg')
+    var svg = d3.select('#us-map-container').append('svg')
       .attr('width', width)
       .attr('height', height);
 

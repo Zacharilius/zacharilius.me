@@ -21,13 +21,30 @@
 
 
 {% block content %}
-
-	<div id="map-container">
-		<span id="state-tooltip"></span>
+	<div id="map-intro">
+		<h2 class="intro-text">Select a Map</h2>
+		<div class="button-container">
+			<button id="show-us-map-container" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+	  			US Map
+			</button>
+		</div>
 	</div>
+	<div id="us-map-container">
+		<h2 class="intro-text">United States</h2>
+		<div class="button-container">
+			<button id="start-us-state-map-quiz" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+	  			Start State Quiz
+			</button>
+		</div>
+
+		<div class="map">
+			<!-- Map is appended here -->
+		</div>
+		<span id="state-tooltip"></span>
 	
-	<div class="wikipedia-search-container">
-		<div id="wikipedia-us-state-search-results">
+		<div class="wikipedia-search-container">
+			<div id="wikipedia-us-state-search-results">
+			</div>
 		</div>
 	</div>
 

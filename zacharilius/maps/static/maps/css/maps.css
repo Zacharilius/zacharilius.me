@@ -1,7 +1,4 @@
-#map-container svg {
-	display: block;
-	margin: 0 auto;
-}
+
 
 #state-tooltip {
   background-color: #FFFFFF;
@@ -16,8 +13,43 @@
   padding: 5px;
 }
 
+
+
+
+/* -------------------------------------------------------------------------- */
+/* Intro */
+
+#map-intro .intro-text {
+  text-align: center;
+}
+
+#map-intro .button-container {
+  text-align: center;
+}
+
+#map-intro button {
+  cursor: pointer;
+}
+
 /* -------------------------------------------------------------------------- */
 /* US State */
+
+#us-map-container {
+  display: none;
+}
+
+#us-map-container .intro-text {
+  text-align: center;
+}
+
+#us-map-container .button-container {
+  text-align: center;
+}
+
+#us-map-container svg {
+  display: block;
+  margin: 0 auto;
+}
 
 .state-boundary {
   fill: none;

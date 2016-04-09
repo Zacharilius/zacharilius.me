@@ -156,7 +156,7 @@ div[ng-controller=MapCtrl] #panel{
 	text-align: left;
 	color: #212121;
 }
-.map-container{
+.us-map-container{
 	padding-top: 15px;
 	padding-bottom: 15px;
 	padding-left: 5%;
