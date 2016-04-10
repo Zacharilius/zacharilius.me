@@ -46,6 +46,14 @@
   text-align: center;
 }
 
+.us-map-quiz-status {
+  text-align: center;
+}
+
+.us-map-quiz-status .quiz-info {
+  display: inline-block;
+}
+
 #us-map-container svg {
   display: block;
   margin: 0 auto;

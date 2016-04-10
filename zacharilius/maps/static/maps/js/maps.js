@@ -48,11 +48,12 @@ function drawUsStatesWithLabels() {
         .attr("width", width)
         .attr("height", height);
     d3.json(window.usStateMapUrl, function(error, us) {
-      if (error) throw error;
-      var states = topojson.feature(us, us.objects.states).features;
-      var neighbors = topojson.neighbors(us.objects.states.geometries);
+        window.usStateGeoJson = us; // FIXME: REMOVE
+        if (error) throw error;
+        var states = topojson.feature(us, us.objects.states).features;
+        var neighbors = topojson.neighbors(us.objects.states.geometries);
 
-      svg.selectAll(".state")
+        svg.selectAll(".state")
             .data(states)
             .enter().insert("path", ".graticule")                  
                 .attr("class", "state")
@@ -76,8 +77,126 @@ function drawUsStatesWithLabels() {
     d3.select(self.frameElement).style("height", height + "px");    
 }
 
+function appendWikipediaStateSearch(stateName){
+    $.ajax({
+        type: "GET",
+        url: 'https://en.wikipedia.org/w/api.php?format=json&action=query&generator=search&gsrnamespace=0&gsrlimit=10&prop=pageimages|extracts&pilimit=max&exintro&explaintext&exsentences=1&exlimit=max&gsrsearch=' + stateName.split(" ").join("%20") + '&callback=JSON_CALLBACK',
+        contentType: "application/json; charset=utf-8",
+        dataType: "jsonp",
+        success: function (parsed_json, textStatus, jqXHR) {
+            $('#wikipedia-us-state-search-results').empty();
+            console.log(parsed_json);
+            var pages = parsed_json.query.pages;
+            for(page in pages){
+                var title = pages[page].title;
+                var extract = pages[page].extract;
+                var pageId = pages[page].pageid;
+                $('#wikipedia-us-state-search-results').append("<a href = http://en.wikipedia.org/?curid="+ pageId + "><div><p><b>" + title + ": </b>" + extract + "</p></br></div></a>");
+            };
+        },
+        error: function (errorMessage) {
+            $('#wikipedia-us-state-search-results').empty();
+            $('#wikipedia-us-state-search-results').html('<p>Error with your request</p>');
+            console.error("ERROR: " + errorMessage);
+        }
+    });
+}
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+/* US State Map */
+
+function usStatesQuiz() {
+    var currentQuizIndex = 0;
+    var numberCorrect = 0;
+    var numberIncorrect = 0;
+
+    var quizLocations = [];
+    var geoJsonLocation = window.usStateGeoJson.objects.states.geometries;
+    for (var i = 0; i < geoJsonLocation.length; i++) {
+        var elementProperties = geoJsonLocation[i].properties;
+        var stateName = elementProperties['STATE_NAME'];
+        quizLocations.push(stateName);
+    }
+    shuffle(quizLocations);
+
+    return {
+        'getQuizLocations': function() {
+            return quizLocations;
+        },
+
+        'getCurrentQuizQuestion': function() {
+            return quizLocations[currentQuizIndex];
+        },
+
+        'getNumberOfCorrectAnswers': function() {
+            return numberCorrect;
+        },
+
+        'getNumberOfIncorrectAnswers': function() {
+            return numberIncorrect;
+        },
+
+        'getNumberQuizQuestions': function() {
+            return quizLocations.length;
+        },
+
+        'getCurrentQuestionOrdinal': function() {
+            return currentQuizIndex + 1;
+        },
+
+        'gradeQuizResponse': function(clickedState) {
+            var questionCorrect = clickedState == quizLocations[currentQuizIndex];
+            if (questionCorrect) {
+                numberCorrect += 1;
+            }
+            else {
+                numberIncorrect += 1;
+            }
+            
+            currentQuizIndex += 1;            
+
+            return questionCorrect;
+        }
+    }
+}
+
 function setupUsStateQuiz() {
-    
+    window.usStatesQuiz = usStatesQuiz()
+    updateQuizState();
+    $('#quiz-total').text(window.usStatesQuiz.getNumberQuizQuestions());
+}
+
+function updateQuizState() {
+    $('#quiz-state').text(window.usStatesQuiz.getCurrentQuizQuestion());
+    $('#quiz-correct').text(window.usStatesQuiz.getNumberOfCorrectAnswers());
+    $('#quiz-incorrect').text(window.usStatesQuiz.getNumberOfIncorrectAnswers());    
+}
+
+function shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+
+    while (0 !== currentIndex) {
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+
+  return array;
+}
+
+function getQuizFrom(geoJsonLocation, name) {
+    geoLocations = [];
+    for (var i = 0; i < geoJsonLocation.length; i++) {
+        var elementProperties = geoJsonLocation[i].properties;
+        var stateName = elementProperties[name];
+        geoLocations.push(stateName);
+    }
+    return geoLocations;
 }
 
 function drawUsStatesForQuiz() {
@@ -114,7 +233,9 @@ function drawUsStatesForQuiz() {
                 .style('fill', '#FFFFFF')
                 .style('stroke', '#232323')
                 .on('click', function(d) {
-                    //appendWikipediaStateSearch(d.properties.STATE_NAME);
+                    var clickedName = $(this).attr('data-name');
+                    window.usStatesQuiz.gradeQuizResponse(clickedName);
+                    updateQuizState();
                 })
                 .on('mousemove', function(d) {
                     $(this).css('fill', $(this).attr('data-color'));
@@ -124,31 +245,6 @@ function drawUsStatesForQuiz() {
                 });
     });
     d3.select(self.frameElement).style("height", height + "px");    
-}
-
-function appendWikipediaStateSearch(stateName){
-    $.ajax({
-        type: "GET",
-        url: 'https://en.wikipedia.org/w/api.php?format=json&action=query&generator=search&gsrnamespace=0&gsrlimit=10&prop=pageimages|extracts&pilimit=max&exintro&explaintext&exsentences=1&exlimit=max&gsrsearch=' + stateName.split(" ").join("%20") + '&callback=JSON_CALLBACK',
-        contentType: "application/json; charset=utf-8",
-        dataType: "jsonp",
-        success: function (parsed_json, textStatus, jqXHR) {
-            $('#wikipedia-us-state-search-results').empty();
-            console.log(parsed_json);
-            var pages = parsed_json.query.pages;
-            for(page in pages){
-                var title = pages[page].title;
-                var extract = pages[page].extract;
-                var pageId = pages[page].pageid;
-                $('#wikipedia-us-state-search-results').append("<a href = http://en.wikipedia.org/?curid="+ pageId + "><div><p><b>" + title + ": </b>" + extract + "</p></br></div></a>");
-            };
-        },
-        error: function (errorMessage) {
-            $('#wikipedia-us-state-search-results').empty();
-            $('#wikipedia-us-state-search-results').html('<p>Error with your request</p>');
-            console.error("ERROR: " + errorMessage);
-        }
-    });
 }
 
 /* -------------------------------------------------------------------------- */
