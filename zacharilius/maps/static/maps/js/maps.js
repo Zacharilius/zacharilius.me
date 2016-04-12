@@ -1,6 +1,6 @@
 $(function() {
     setupMouseMoveTooltipLabel()
-    setupUsStateMap(); 
+    setupUsStateMap();
 });
 
 function setupMouseMoveTooltipLabel() {
@@ -55,14 +55,14 @@ function drawUsStatesWithLabels() {
 
         svg.selectAll(".state")
             .data(states)
-            .enter().insert("path", ".graticule")                  
+            .enter().insert("path", ".graticule")
                 .attr("class", "state")
                 .attr("d", path)
                 .attr('data-name', function(d) { return d.properties.STATE_NAME})
-                .attr('data-abbrev', function(d) { return d.properties.STATE_ABBR})                
-                .style("fill", function(d, i) { 
-                    return color(d.color = d3.max(neighbors[i], 
-                        function(n) { return states[n].color; }) + 1 | 0); 
+                .attr('data-abbrev', function(d) { return d.properties.STATE_ABBR})
+                .style("fill", function(d, i) {
+                    return color(d.color = d3.max(neighbors[i],
+                        function(n) { return states[n].color; }) + 1 | 0);
                 })
                 .on('click', function(d) {
                     appendWikipediaStateSearch(d.properties.STATE_NAME);
@@ -74,7 +74,7 @@ function drawUsStatesWithLabels() {
                     $('#state-tooltip').hide();
                 });
     });
-    d3.select(self.frameElement).style("height", height + "px");    
+    d3.select(self.frameElement).style("height", height + "px");
 }
 
 function appendWikipediaStateSearch(stateName){
@@ -152,8 +152,8 @@ function usStatesQuiz() {
             else {
                 numberIncorrect += 1;
             }
-            
-            currentQuizIndex += 1;            
+
+            currentQuizIndex += 1;
 
             return questionCorrect;
         }
@@ -169,7 +169,7 @@ function setupUsStateQuiz() {
 function updateQuizState() {
     $('#quiz-state').text(window.usStatesQuiz.getCurrentQuizQuestion());
     $('#quiz-correct').text(window.usStatesQuiz.getNumberOfCorrectAnswers());
-    $('#quiz-incorrect').text(window.usStatesQuiz.getNumberOfIncorrectAnswers());    
+    $('#quiz-incorrect').text(window.usStatesQuiz.getNumberOfIncorrectAnswers());
 }
 
 function shuffle(array) {
@@ -202,39 +202,58 @@ function getQuizFrom(geoJsonLocation, name) {
 function drawUsStatesForQuiz() {
     var width = $(window).width();
     var height = $(window).height();
-    var projection = d3.geo.albersUsa()
-        .scale(1000)
-        .translate([width / 2, height / 2]);
+    scale0 = width  * .5;
+
+    var projection = d3.geo.albersUsa();
+
+    var zoom = d3.behavior.zoom()
+        .translate([width / 2, height / 2])
+        .scale(scale0)
+        .scaleExtent([scale0, 8 * scale0])
+        .on("zoom", zoomed);
 
     var color = d3.scale.category10()
     color.range(color.range().slice(0,8));
 
     var path = d3.geo.path()
         .projection(projection);
+
     var svg = d3.select("#us-map-container .map").append("svg")
         .attr("width", width)
         .attr("height", height);
-    d3.json(window.usStateMapUrl, function(error, us) {
-      if (error) throw error;
-      var states = topojson.feature(us, us.objects.states).features;
-      var neighbors = topojson.neighbors(us.objects.states.geometries);
 
-      svg.selectAll(".state")
+    var g = svg.append("g");
+
+    // svg.append("rect")
+    //     .attr("class", "overlay")
+    //     .attr("width", width)
+    //     .attr("height", height);
+
+    svg.call(zoom)
+        .call(zoom.event);
+
+    d3.json(window.usStateMapUrl, function(error, us) {
+        if (error) throw error;
+
+        var states = topojson.feature(us, us.objects.states).features;
+        var neighbors = topojson.neighbors(us.objects.states.geometries);
+
+        g.selectAll(".state")
             .data(states)
             .enter().insert("path", ".graticule")
                 .attr("class", "state")
                 .attr("d", path)
                 .attr('data-name', function(d) { return d.properties.STATE_NAME})
-                .attr('data-abbrev', function(d) { return d.properties.STATE_ABBR})                
-                .attr("data-color", function(d, i) { 
-                    return color(d.color = d3.max(neighbors[i], 
-                        function(n) { return states[n].color; }) + 1 | 0); 
+                .attr('data-abbrev', function(d) { return d.properties.STATE_ABBR})
+                .attr("data-color", function(d, i) {
+                    return color(d.color = d3.max(neighbors[i],
+                        function(n) { return states[n].color; }) + 1 | 0);
                 })
                 .style('fill', '#FFFFFF')
                 .style('stroke', '#232323')
                 .on('click', function(d) {
                     var clickedName = $(this).attr('data-name');
-                    window.usStatesQuiz.gradeQuizResponse(clickedName);
+                    window.usStatesQuiz.gradeQuizResponse(clickedName); // TODO: remove use of global variable
                     updateQuizState();
                 })
                 .on('mousemove', function(d) {
@@ -244,7 +263,17 @@ function drawUsStatesForQuiz() {
                     $(this).css('fill', '#FFFFFF');
                 });
     });
-    d3.select(self.frameElement).style("height", height + "px");    
+
+    function zoomed() {
+        projection
+            .translate(zoom.translate())
+            .scale(zoom.scale());
+
+        g.selectAll("path")
+            .attr("d", path);
+    }
+
+    d3.select(self.frameElement).style("height", height + "px");
 }
 
 /* -------------------------------------------------------------------------- */
@@ -284,7 +313,7 @@ function drawWorldStarbucksMap() {
         svg.insert('path', '.graticule')
             .datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }))
             .attr('class', 'boundary')
-            .attr('d', path);            
+            .attr('d', path);
     });
 
 
