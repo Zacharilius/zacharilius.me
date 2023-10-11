@@ -1,0 +1,23 @@
+.nav-logo {
+  text-align: center;
+  img {
+    width: 200px;
+  }
+  min-height: 200px;
+}
+
+.nav-link {
+  color: var(--bs-primary);
+}
+
+.nav-link:hover {
+  color: var(--bs-primary);
+  transition: all 0.1s ease-in 0s;
+  border-bottom: 2px solid var(--bs-primary);
+}
+
+.nav-link.active {
+  color: var(--bs-primary);
+  transition: all 0.1s ease-out 0s;
+  border-bottom: 2px solid var(--bs-primary);
+}
