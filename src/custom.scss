@@ -1,0 +1,19 @@
+// Override default variables before the import
+// $body-bg: #000;
+
+// https://huemint.com/bootstrap-basic/#palette=e0e4e3-ffffff-031027-01737c-826e64-701948
+$white: #ffffff;
+$theme-colors: (
+    "light":      #e0e4e3,
+    "dark":       #031027,
+    "primary":    #19A295,
+    // "primary":    #01737c,
+    "secondary":  #826e64,
+    "info":       #701948,
+    "success":    #019846,
+    "warning":    #e7c401,
+    "danger":     #ee0029,
+);
+
+// Import Bootstrap and its default variables
+@import '~bootstrap/scss/bootstrap.scss';
