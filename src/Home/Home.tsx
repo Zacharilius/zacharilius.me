@@ -12,8 +12,8 @@ function Home() {
 			<div>
 				<p>
 					I am a Software Engineer who
-					is currently working remotely in Baltimore, MD. I love
-					writing code and making maps. Most of my personal projects
+					is currently working in the Washington DC Metro Area. I love
+					writing code, making maps, and data visualization. Most of my personal projects
 					try to incorporate my love of coding and maps. I am
 					currently working as a Senior Software Engineer at Qualtrics
 					on the reporting applications team.
