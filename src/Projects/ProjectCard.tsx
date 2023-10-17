@@ -26,18 +26,20 @@ const ProjectCard = ({title, description, image, projectIcons}: ProjectCardInter
 		<Card className='project-card col-sm-4 d-flex flex-column'>
 			<div className='project-card-inner-container'>
 				<Card.Img variant="top" src={image.src} alt={image.alt} />
-				<Card.Body className="Project-card-body">
-					<Card.Title>{title}</Card.Title>
-					<Card.Text>{description}</Card.Text>
-					{
-						projectIcons.map((projectIcon) => {
-							return <>
-								<Button className="project-card-icons" key={projectIcon.url} variant="link" href={projectIcon.url}>
-									{projectIcon.icon}
-								</Button>
-							</>
-						})
-					}
+				<Card.Body className="Project-card-body d-flex align-items-center justify-content-center">
+					<div>
+						<Card.Title>{title}</Card.Title>
+						<Card.Text>{description}</Card.Text>
+						{
+							projectIcons.map((projectIcon) => {
+								return <>
+									<Button className="project-card-icons" key={projectIcon.url} variant="link" href={projectIcon.url}>
+										{projectIcon.icon}
+									</Button>
+								</>
+							})
+						}
+					</div>
 				</Card.Body>
 			</div>
 		</Card>

@@ -2,13 +2,12 @@ import React from 'react';
 import ProjectCard, {
 	ProjectCardInterface
 } from './ProjectCard';
-import {
-	Github, Twitter
-} from 'react-bootstrap-icons';
+import Github from './ProjectIcon/Github';
+import Twitter from './ProjectIcon/Twitter';
 import ForgetMeKnot from './images/ForgetMeKnot.png';
 import MapRoomBackground from './images/MapRoomBackground.png';
 import RummyCumulativeWinner from './images/RummyCumulativeWinner.png';
-import WilliamShakespurr from './images/WilliamShakespurr.png';
+import WilliamShakespurr from './images/WilliamShakespurr.jpg';
 import ZombieEscape from './images/ZombieEscape.png';
 
 const projects: ProjectCardInterface[] = [
@@ -28,7 +27,7 @@ const projects: ProjectCardInterface[] = [
 	},
 	{
 		title: 'Zombie Escape',
-		description: 'A top down game written in PyGame that you play as a zombie who tries to eat as many brains as possible before one of Van Helsing daughters finds and kills you.',
+		description: 'A silly, top down game written in Python and PyGame that you play as a zombie who tries to eat as many brains as possible before one of Van Helsing daughters finds and kills you.',
 		image: {
 			src: ZombieEscape,
 			alt: 'Picture of Zombie Escape Game'
@@ -56,7 +55,7 @@ const projects: ProjectCardInterface[] = [
 	},
 	{
 		title: 'Shakespurrian Bot',
-		description: 'A X (twitter) bot written in Python that posts a Shakespeare quote that was translated from English into Cat. Special thanks to http://kittify.herokuapp.com/ for the English to Cat translations.',
+		description: 'An X (twitter) bot written in Python that posts a Shakespeare quote that was translated from English into Cat. Special thanks to http://kittify.herokuapp.com/ for the English to Cat translations.',
 		image: {
 			src: WilliamShakespurr,
 			alt: 'Picture of William Shakespurr'
