@@ -92,7 +92,7 @@ function Projects() {
 		<div className="row">
 			{
 				projects.map((project) => {
-					return <ProjectCard {...project} />
+					return <ProjectCard key={project.title} {...project} />
 				})
 			}
 
